@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - WebApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom border-left-0 border-right-0 box-shadow sm-3">
+        <div class="container d-flex justify-content-center">
+            <div class="accordion" id="accordionExample">
+                <div class="card border-0  ">
+                    <div class="card-header bg-light" id="headingOne" >
+                        <h2 class="mb-0 d-flex justify-content-center" >
+                            <button style="width: 150px; height: 53px;" class=" btn btn-link navbar-brand d-flex justify-content-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <img src="~/logo2.png" alt="logo" style="width: 150px; height: 53px; margin-left: 10px; background:none;">
+                                @* M i n e S w e e p e r *@
+                            </button>    
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse  bg-light" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body d-flex justify-content-center">
+                            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse ">
+                                <ul class="navbar-nav flex-grow-1">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Game/MainMenu">Main Menu</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-page="/Game/StartGame">Start Game</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container text-monospace" style="padding-top: 30px">
+    <main role="main" class="pb-3 ">
+        @RenderBody()
+    </main>
+
+</div>
+
+<footer class="border-top footer text-muted">
+    <div class="container d-flex justify-content-center">
+        &copy; 2019 - WebApp - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

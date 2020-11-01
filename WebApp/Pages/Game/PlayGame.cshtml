@@ -1,0 +1,147 @@
+﻿@page
+@using GameEngine
+@model WebApp.Pages.Game.PlayGame
+
+<hr class="w-50"/>
+<div class="d-flex justify-content-center">
+    <div class="table table-dark table-borderless " style="width: @(Model.BoardWidth * 39)px;height:@(Model.BoardWidth * 40)px;  position: absolute">
+        <tbody>
+        @for (var y = 0; y < Model.BoardHeight; y++)
+        {
+            <tr class="row">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                        @for (var x = 0; x < Model.BoardWidth; x++)
+                        {
+                            @if (!Model.NotOpenValues.Contains(Model.Board[y, x]))
+                            {
+                                <td>
+                                    <a type="button" class="btn btn-info disabled btn-dark" style="width: 40px ;height: 40px">@Html.Raw(GetGameButtonLabel(Model.Board[y, x]))</a>
+                                </td>
+                            }
+                            else
+                            {
+                                if (Model.GameOver)
+                                {
+                                    if (Model.Board[y, x] == CellState.S)
+                                    {
+                                        <td>
+                                            @* <img src="~/mine3.png" alt="mine" style="width: 40px;height: 40px; background: red; "/> *@
+                                            @* <button type="button" class="btn btn-danger " style="width: 40px">@Html.Raw(GetGameButtonLabel(CellState.B))</button> *@
+                                            <button type="button" class="btn btn-danger " style="width: 40px;height: 40px">@Html.Raw(GetGameButtonLabel(CellState.B))</button>
+
+
+                                            @* <img src="~/mine.png" alt="mine" style="width: 40px;height: 40px; background-image: i"> *@
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <button type="button" class="btn btn-primary " style="width: 40px;height: 40px">@Html.Raw(GetGameButtonLabel(Model.Board[y, x]))</button>
+
+                                        </td>
+                                    }
+                                }
+                                else if (Model.WinGame)
+                                {
+                                    if (Model.Board[y, x] == CellState.S)    
+                                    {
+                                        <td>
+                                            <button type="button" class="btn btn-warning" style="width: 40px;height: 40px">@Html.Raw(GetGameButtonLabel(CellState.B))</button>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <button type="button" class="btn btn-primary " style="width: 40px;height: 40px">@Html.Raw(GetGameButtonLabel(Model.Board[y,x]))</button>
+                                        </td>
+                                    }
+                                }
+                                else
+                                {
+                                    <td>
+                                        <a asp-page="./PlayGame" asp-route-gameId="@Model.GameId" asp-route-col="@x" asp-route-row="@y" type="button" class="btn btn-primary btn-outline-success " style="width: 40px ;height: 40px">@Html.Raw(GetGameButtonLabel(Model.Board[y, x]))</a>
+                                    </td>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </tr>
+        }
+
+        </tbody>
+    </div>
+    <hr style="padding-top: @(Model.BoardHeight * 35)px"/>
+    @if (Model.GameOver)
+    {
+        <a asp-page="./MainMenu" class="btn btn-outline-danger border-0" style="width: @((Model.BoardWidth) * 40 -7)px; height: @(Model.BoardHeight * 40)px; position: absolute">
+            <div class="alert alert-danger" role="alert">
+                Y o u @Html.Raw("&nbsp;")L o s t
+            </div>
+        </a>
+        <div @Model.DeleteGame(Model.GameId)></div>
+    }
+    @if (Model.WinGame)
+    {
+        <a asp-page="./MainMenu" class="btn btn-outline-warning border-0" style="width: @((Model.BoardWidth) * 40 - 15)px; height: @(Model.BoardHeight * 40)px; position: absolute">
+            <div class="alert alert-warning" role="alert">
+                C o n g r a d s, @Html.Raw("&nbsp;") Y o u @Html.Raw("&nbsp;") W o n !
+            </div>
+        </a>
+        <div @Model.DeleteGame(Model.GameId)></div>
+    }
+</div>
+
+@functions
+{
+
+    string GetGameButtonLabel(CellState cellState)
+    {
+        switch (cellState)
+        {
+            case CellState.E:
+                return "&nbsp;&nbsp;";
+            case CellState.X:
+                return "&nbsp;&nbsp;";
+            case CellState.S:
+                return "&nbsp;&nbsp;";
+            case CellState.B:
+                return "B";
+            case CellState.ONE:
+                return "&nbsp;&nbsp;";
+            case CellState.ONEOPEN:
+                return "1";
+            case CellState.TWO:
+                return "&nbsp;&nbsp;";
+            case CellState.TWOOPEN:
+                return "2";
+            case CellState.THREE:
+                return "&nbsp;&nbsp;";
+            case CellState.THREEOPEN:
+                return "3";
+            case CellState.FOUR:
+                return "&nbsp;&nbsp; ";
+            case CellState.FOUROPEN:
+                return "4";
+            case CellState.FIVE:
+                return "&nbsp;&nbsp;";
+            case CellState.FIVEOPEN:
+                return "5";
+            case CellState.SIX:
+                return "&nbsp;&nbsp;";
+            case CellState.SIXOPEN:
+                return "6";
+            case CellState.SEVEN:
+                return "&nbsp;&nbsp; ";
+            case CellState.SEVENOPEN:
+                return "7";
+            case CellState.EIGHT:
+                return "&nbsp;&nbsp;";
+            case CellState.EIGHTOPEN:
+                return "8";
+        }
+        return "Z";
+    }
+
+}

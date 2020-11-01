@@ -1,0 +1,110 @@
+﻿@page
+@using System.ComponentModel.DataAnnotations
+@model WebApp.Pages.Game.StartGame
+
+@{
+    ViewData["Title"] = "Start a new game";
+}
+<h1 class="d-flex justify-content-center">Start Game</h1>
+<hr class="w-50"/>
+@if (!Model.isCorrect)
+{
+    <div class="alert alert-danger d-flex justify-content-center" role="alert">
+        Game with this Name already exists!
+        <br>
+
+    </div>
+}
+@if (!Model.BombAmount)
+{
+    <div class="alert alert-danger d-flex justify-content-center" role="alert">
+        Too many bombs entered!
+        <br>
+
+    </div>
+}
+<div class="d-flex justify-content-center">
+
+    <div class="accordion w-50" id="accordionExample">
+        <div class="card ">
+            <div class="card-header" id="headingOne">
+                <h2 class=" d-flex justify-content-center">
+                    <button class="btn btn-link-dark collapsed " type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Classic Game
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body d-flex justify-content-center">
+                    <form method="post" asp-route-form="newgame">
+                        <div class="form-group">
+                            <input type="submit" asp-for="FieldSize" value="Small Field" class="btn btn-primary w-100"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" asp-for="FieldSize" value="Medium Field" class="btn btn-primary w-100"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" asp-for="FieldSize" value="Large Field" class="btn btn-primary w-100"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="GameOptions.GameName" class="control-label"></label>
+                            <input asp-for="GameOptions.GameName" class="form-control" value="@Model.SaveName"/>
+                            <span asp-validation-for="GameOptions.GameName" class="text-danger"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="d-flex justify-content-center">
+                    <button class="btn btn-link-dark collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Custom Game
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body d-flex justify-content-center">
+                    <form method="post">
+                        <div class="form-group">
+                            <label asp-for="GameOptions.Height" class="control-label"></label>
+                            <input asp-for="GameOptions.Height" class="form-control"/>
+                            <span asp-validation-for="GameOptions.Height" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="GameOptions.Width" class="control-label"></label>
+                            <input asp-for="GameOptions.Width" class="form-control"/>
+                            <span asp-validation-for="GameOptions.Width" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="GameOptions.Bombs" class="control-label"></label>
+                            <input asp-for="GameOptions.Bombs" class="form-control"/>
+                            <span asp-validation-for="GameOptions.Bombs" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="GameOptions.GameName" class="control-label"></label>
+                            <input asp-for="GameOptions.GameName" class="form-control" value="@Model.SaveName"/>
+                            <span asp-validation-for="GameOptions.GameName" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Start game" class="btn btn-primary" style="width: 200px"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="w-50"/>
+<div class="d-flex justify-content-center ">
+
+    <a asp-page="./MainMenu" class="btn btn-primary btn-block w-50">Back to Main Menu</a>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

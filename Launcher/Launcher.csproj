@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ConsoleUI\ConsoleUI.csproj" />
+      <ProjectReference Include="..\DAL\DAL.csproj" />
+      <ProjectReference Include="..\GameEngine\GameEngine.csproj" />
+      <ProjectReference Include="..\MenuSystem\MenuSystem.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,68 @@
+﻿@page
+@using Microsoft.CodeAnalysis
+@model WebApp.Pages.Game.MainMenu
+
+@{
+    ViewData["Title"] = "Start a new game";
+}
+<h1 class="d-flex justify-content-center">Main Menu</h1>
+<hr class="w-50"/>
+<p class="d-flex justify-content-center">
+    <a asp-page="./StartGame" class="btn btn-primary btn-block w-50" type="button">
+            New Game
+        </a>
+    </p>
+<p class="d-flex justify-content-center">
+        <button class="btn btn-primary btn-block  w-50 " type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Load Game
+        </button>
+        </p>
+        <div class="d-flex justify-content-center ">
+            <div class="collapse @Model.CollapseShow " id="collapseExample">
+                        <div class="card card-body " style="width: max-content">
+                            <table class="table table-sm ">
+                                <thead>
+                                <tr>
+                                    <th>
+                                        Name
+                                    </th>
+                                    <th>
+                                        Width
+                                    </th>
+                                    <th>
+                                        Height
+                                    </th>
+                                    <th>Actions</th>
+                                    <th><br></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach (var item in Model.GameSettings)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.GameName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BoardWidth)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BoardHeight)
+                                        </td>
+                                        <td>
+                                            <a asp-page="./PlayGame" asp-route-gameId="@item.GameId" class="btn btn-primary" type="button">Load</a>
+            
+                                        </td>
+                                        <td><a asp-page="./MainMenu" asp-route-gameId="@item.GameId" asp-route-collapse="show" class="btn btn-primary" type="button">Delete</a></td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+        </div>
+<div class="row d-flex justify-content-center">
+            <a href="https://www.paypal.com/home" class="btn btn-primary">Donate</a>
+        </div>
+<hr class="w-50"/>
+
